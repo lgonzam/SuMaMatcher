@@ -1,0 +1,12 @@
+5411AVR ; Posible código 1 ; 01/09/2022
+5125HBP ; Posible código 1 ; 01/10/2022
+5485KVR ; Posible código 23 ; 30/11/2022
+6271GLK ; Posible código 2 ; 30/11/2022
+5128HBP ; Posible código 2 ; 01/11/2021
+4891KWK ; Posible código 2 ; 30/11/2022
+1122AVR ; Posible código 12 ; 25/10/2022
+A0798BV ; Posible código 11 ; 30/12/2022
+5485AZR ; Posible código 3 ;
+6860KFG ; Posible código 12 ; 30/12/2022
+7374GSJ ; Posible código 12 ; 30/12/2022
+

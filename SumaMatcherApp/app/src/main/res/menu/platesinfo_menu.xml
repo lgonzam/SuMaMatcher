@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<item
+    android:id="@+id/option_loadfile"
+    android:icon="@drawable/ic_home_black_24dp"
+    android:title="@string/option_loadfile" />
+    <item
+        android:id="@+id/option_deleteplates"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/option_deleteplates" />
+
+</menu>

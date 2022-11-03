@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item
+        android:id="@+id/opcion_config"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/option_config" />
+    <item
+        android:id="@+id/opcion_viewhistory"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/option_viewhistory" />
+
+    <item
+        android:id="@+id/opcion_viewplatesinfo"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/option_viewplatesinfo" />
+
+
+
+    <item
+        android:id="@+id/opcion_ayuda"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/option_help" />
+
+
+</menu>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="2dp">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fillViewport="true"
+            android:background="@color/white">
+
+            <TableLayout
+                android:id="@+id/resultTable"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:stretchColumns="*"
+                android:visibility="visible">
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="left"
+                    android:visibility="visible">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_column="0"
+                        android:visibility="visible"
+                        android:layout_gravity="left"
+                        android:gravity="left"
+                        android:text="@string/lblDate" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_column="1"
+                        android:visibility="visible"
+                        android:layout_gravity="left"
+                        android:gravity="left"
+                        android:text="@string/lblHora" />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="visible"
+                        android:layout_gravity="left"
+                        android:gravity="left"
+                        android:layout_column="2"
+                        android:text="@string/lblImage" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="visible"
+                        android:layout_gravity="left"
+                        android:gravity="left"
+                        android:layout_column="3"
+                        android:text="@string/lblPlate" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="visible"
+                        android:layout_gravity="left"
+                        android:gravity="left"
+                        android:layout_column="4"
+                        android:text="@string/lblConfidence" />
+
+                </TableRow>
+            </TableLayout>
+        </ScrollView>
+        <ProgressBar
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:id="@+id/progressBar"
+            android:layout_alignParentBottom="true" />
+    </LinearLayout>
+
