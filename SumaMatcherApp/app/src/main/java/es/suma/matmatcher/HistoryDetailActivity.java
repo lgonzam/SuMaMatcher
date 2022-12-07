@@ -31,21 +31,21 @@ import android.widget.TextView;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import es.suma.matmatcher.R;
 import es.suma.matmatcher.ui.BoxTracker;
 import es.suma.matmatcher.model.AlprDetection;
 import es.suma.matmatcher.model.AlprStore;
 
 import java.io.File;
+import java.util.Locale;
 
-public class DetailActivity extends AppCompatActivity {
+public class HistoryDetailActivity extends AppCompatActivity {
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_detail);
+        setContentView(R.layout.activity_historydetail);
 
         ImageView imageView = findViewById(R.id.imageView);
         TextView textDate = findViewById(R.id.textDate);
@@ -75,7 +75,7 @@ public class DetailActivity extends AppCompatActivity {
 
         textDate.setText( detection.getmFormatDatetime());
         textPlate.setText( detection.getmPlate());
-        String w_confidence=String.format("%.0f", detection.getmConfidence()) + " %";
+        String w_confidence=String.format(Locale.getDefault(), "%.0f", detection.getmConfidence()) + " %";
         textConfidence.setText(w_confidence);
         String w_info = detection.getInfo();
         if (w_info==null || w_info.equalsIgnoreCase(""))

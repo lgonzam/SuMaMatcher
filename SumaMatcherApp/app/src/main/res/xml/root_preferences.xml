@@ -10,11 +10,18 @@
             app:title="@string/function_mode_title"
             app:useSimpleSummaryProvider="true" />
         <ListPreference
-            app:defaultValue="1024x720"
+            app:defaultValue="720x720"
             app:entries="@array/resolutions_entries"
             app:entryValues="@array/resolutions_values"
             app:key="preview-size"
             app:title="@string/previewsize_title"
+            app:useSimpleSummaryProvider="true" />
+        <ListPreference
+            app:defaultValue="1"
+            app:entries="@array/zoom_entries"
+            app:entryValues="@array/zoom_values"
+            app:key="zoom"
+            app:title="@string/zoom_title"
             app:useSimpleSummaryProvider="true" />
         <ListPreference
             app:defaultValue="true"
@@ -29,19 +36,11 @@
 
 
         <ListPreference
-            app:defaultValue="eu"
+            app:defaultValue="es"
             app:entries="@array/country_entries"
             app:entryValues="@array/country_values"
             app:key="alpr-country"
             app:title="@string/country_title"
-            app:useSimpleSummaryProvider="true" />
-
-        <ListPreference
-            app:defaultValue="es"
-            app:entries="@array/region_entries"
-            app:entryValues="@array/region_values"
-            app:key="alpr-region"
-            app:title="@string/region_title"
             app:useSimpleSummaryProvider="true" />
 
         <ListPreference
@@ -78,5 +77,20 @@
 
 
     </PreferenceCategory>
-
+    <PreferenceCategory app:title="@string/debug_header">
+        <ListPreference
+            app:defaultValue="false"
+            app:entries="@array/debug_mode_entries"
+            app:entryValues="@array/debug_mode_values"
+            app:key="debug-mode"
+            app:title="@string/debug_title"
+            app:useSimpleSummaryProvider="true" />
+        <ListPreference
+            app:defaultValue="rgb"
+            app:entries="@array/color_mode_entries"
+            app:entryValues="@array/color_mode_values"
+            app:key="color-mode"
+            app:title="@string/colormode_title"
+            app:useSimpleSummaryProvider="true" />
+    </PreferenceCategory>
 </PreferenceScreen>

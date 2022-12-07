@@ -20,12 +20,20 @@
         android:paddingTop="2dp"
         android:paddingBottom="10dp">
 
+        <TextView
+            android:id="@+id/text_info"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            android:text="@string/default_info_description" />
+
         <ImageView
             android:id="@+id/bottom_sheet_arrow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/icn_chevron_up" />
+            android:src="@drawable/icn_chevron_up"
+            android:contentDescription="@string/imageview_description" />
 
     </LinearLayout>
 
@@ -55,7 +63,7 @@
                     android:id="@+id/actionButton"
                     android:layout_width="match_parent"
                     android:layout_height="54dp"
-                    android:text="Button" />
+                     />
 
             </LinearLayout>
         </RelativeLayout>
@@ -74,25 +82,25 @@
             android:id="@+id/optButton1"
             android:layout_width="match_parent"
             android:layout_height="54dp"
-            android:text="9999ZZZ" />
+            android:text="@string/plate_sample" />
 
         <Button
             android:id="@+id/optButton2"
             android:layout_width="match_parent"
             android:layout_height="54dp"
-            android:text="9999ZZZ" />
+            android:text="@string/plate_sample" />
 
         <Button
             android:id="@+id/optButton3"
             android:layout_width="match_parent"
             android:layout_height="54dp"
-            android:text="9999ZZZ" />
+            android:text="@string/plate_sample" />
 
         <Button
             android:id="@+id/optButton4"
             android:layout_width="match_parent"
             android:layout_height="54dp"
-            android:text="9999ZZZ" />
+            android:text="@string/plate_sample" />
 
     </LinearLayout>
 

@@ -4,10 +4,9 @@
     <string name="camera_header">Ajustes generales</string>
     <string name="previewsize_title">Resolución</string>
     <string name="alpr_header">Ajustes del detector</string>
-    <string name="region_title">País/Región</string>
     <string name="topresults_title">Nº resultados</string>
     <string name="minconfidence_title">Minima confiabilidad</string>
-    <string name="country_title">Continente/Pais</string>
+    <string name="country_title">País/Región</string>
     <string name="message_deletehistory">Se borrará el historial registrado hasta el momento. Está acción no se puede deshacer ¿Continuamos con el borrado?</string>
     <string name="title_deletehistory">Borrado historial</string>
     <string name="title_yes">Sí</string>
@@ -49,5 +48,20 @@
     <string name="lblImage">Imagen:</string>
     <string name="lblHora">Hora</string>
     <string name="lblExpires">Caducidad</string>
-
+    <string name="plate_sample">9999ZZZ</string>
+    <string name="imageview_description">TODO</string>
+    <string name="default_info_description">...</string>
+    <string name="todo">TODO</string>
+    <string name="debug_header">Opciones de desarrollo</string>
+    <string name="debug_title">Depuracion</string>
+    <string name="colormode_title">Modo de color</string>
+    <string name="message_error_date">\"Error. fecha incorrecta. Debe estar en formato dd/MM/yyyy. Línea de fichero \"</string>
+    <string name="zoom_title">Zoom</string>
+    <string name="option_newentry" >Nuevo</string>
+    <string name="message_error_plateinfo">Debe indicar la información asociada a la matrícula. (10 a 60 caracteres).</string>
+    <string name="message_error_plate">Debe indicar la matrícula. (De 5 a 8 caracteres)</string>
+    <string name="button_label_cancel">Cancelar</string>
+    <string name="button_label_accept">Aceptar</string>
+    <string name="message_error_expires">Debe indicar una fecha valida en formato dd/mm/aaaa</string>
+    <string name="button_label_delete">Borrar</string>
 </resources>

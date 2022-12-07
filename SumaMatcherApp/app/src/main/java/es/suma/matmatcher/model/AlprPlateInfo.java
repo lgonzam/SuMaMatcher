@@ -50,8 +50,8 @@ public class AlprPlateInfo {
     private final String mId;
     private final String mDatetime;
     private final String mPlate;
-    private final String mInfo;
-    private final String mExpires;
+    private String mInfo;
+    private String mExpires;
 
     public String getmId() {
         return mId;
@@ -71,5 +71,13 @@ public class AlprPlateInfo {
 
     public String getmExpires() {
         return mExpires;
+    }
+
+    public void setmInfo(String info) {
+        mInfo=info;
+    }
+
+    public void setmExpires(String expires) {
+        mExpires = expires;
     }
 }

@@ -48,8 +48,6 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import es.suma.matmatcher.R;
-
 import es.suma.matmatcher.util.FileUtils;
 import es.suma.matmatcher.util.Logger;
 import es.suma.matmatcher.model.AlprDetection;
@@ -236,7 +234,7 @@ public class HistoryActivity extends AppCompatActivity {
     private void showDetail(AlprDetection result) {
         String w_pathname= appCtx.getApplicationInfo().dataDir + File.separator + "images";
         String w_filename= result.getmFilename();
-        Intent intent = new Intent(this, DetailActivity.class);
+        Intent intent = new Intent(this, HistoryDetailActivity.class);
         intent.putExtra("id", result.getmId());
         intent.putExtra("pathname", w_pathname);
         intent.putExtra("filename", w_filename);

@@ -53,7 +53,6 @@ public class AlprDetection {
     private final int mY1;
     private final double mProcessTime;
     private final RectF m_location;
-    private final Logger LOG = new Logger();
     private long m_timestamp =0;
     private String m_info;
 
@@ -92,6 +91,7 @@ public class AlprDetection {
         mFilename=filename;
         mImage = BitmapFactory.decodeFile(path + File.separator+mFilename);
         if (mImage==null){
+            Logger LOG = new Logger();
             LOG.e("Error loading image. path="+path+" filename="+filename);
         }
         mPlate = plate;
@@ -182,7 +182,7 @@ public class AlprDetection {
 
     public String getmFormatDatetime() {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
-        Date w_date = null;
+        Date w_date ;
         try {
             w_date=df.parse(mDatetime);
         } catch (ParseException e) {

@@ -60,8 +60,19 @@ public class BoxTracker {
     private Bitmap rgbFrameBitmap;
     private RectF shapeScreenRect;
     private boolean initDraw=false;
+    private float m_textSize=30;
 
     public BoxTracker() {
+        boxPaint.setColor(Color.GREEN);
+        boxPaint.setStyle(Style.STROKE);
+        boxPaint.setStrokeWidth(10.0f);
+        boxPaint.setStrokeCap(Cap.ROUND);
+        boxPaint.setStrokeJoin(Join.ROUND);
+        boxPaint.setStrokeMiter(100);
+    }
+
+    public BoxTracker(float textSize) {
+        m_textSize=textSize;
         boxPaint.setColor(Color.GREEN);
         boxPaint.setStyle(Style.STROKE);
         boxPaint.setStrokeWidth(10.0f);
@@ -99,6 +110,7 @@ public class BoxTracker {
                         false);
 
         if ( shapeScreenRect!=null){
+
             final RectF shapePos = new RectF(shapeScreenRect);
             shapePos.top += 5;
             shapePos.left += 5;
@@ -143,7 +155,7 @@ public class BoxTracker {
 
         boxPaint.setColor(Color.GREEN);
         boxPaint.setStyle(Paint.Style.STROKE);
-        boxPaint.setStrokeWidth(5);
+        boxPaint.setStrokeWidth(4);
 
         float cornerSize = Math.min(trackedPos.width(), trackedPos.height()) / 8.0f;
         canvas.drawRoundRect(trackedPos, cornerSize, cornerSize, boxPaint);
@@ -153,7 +165,7 @@ public class BoxTracker {
                         ? String.format("%s %.2f", label, (confidence))
                         : String.format("%.2f", (confidence));
 
-        boxPaint.setTextSize(40);
+        boxPaint.setTextSize(m_textSize);
         boxPaint.setStyle(Paint.Style.FILL);
         boxPaint.setTypeface(Typeface.DEFAULT_BOLD);
         boxPaint.setColor(Color.YELLOW);
@@ -170,12 +182,9 @@ public class BoxTracker {
         final Matrix rgbFrameToScreen = new Matrix(getFrameToCanvasMatrix());
 
         this.shapeScreenRect = null;
-        if (shape!=null && initDraw){
+        if (shape!=null ){
 
-            final RectF shapeFrameRect = new RectF(shape);
-            final RectF shapeScreenRect = new RectF();
-            rgbFrameToScreen.mapRect(shapeScreenRect, shapeFrameRect);
-            this.shapeScreenRect = shapeScreenRect;
+            this.shapeScreenRect = shape;
         }
 
         if (location == null) {

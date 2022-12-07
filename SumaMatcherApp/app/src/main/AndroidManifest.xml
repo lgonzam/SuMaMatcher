@@ -33,7 +33,7 @@
             android:label="@string/title_history_activity"
             android:screenOrientation="fullSensor" />
         <activity
-            android:name=".DetailActivity"
+            android:name=".HistoryDetailActivity"
             android:exported="true"
             android:label="@string/title_detail_activity"
             android:screenOrientation="fullSensor" />

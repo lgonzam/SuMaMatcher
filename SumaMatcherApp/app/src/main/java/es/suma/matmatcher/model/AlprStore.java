@@ -48,6 +48,7 @@ public class AlprStore {
     }
 
 
+
     private static class DetectionEntry implements BaseColumns {
         public static final String TABLE_NAME = "alpr_detections";
         public static final String COLUMN_ID = "id";
@@ -301,6 +302,31 @@ public class AlprStore {
 
 
 
+    public long updatePlateInfo(AlprPlateInfo record) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(PlatesInfoEntry.COLUMN_ID, record.getmId());
+        values.put(PlatesInfoEntry.COLUMN_DATETIME, record.getmDatetime());
+        values.put(PlatesInfoEntry.COLUMN_PLATE, record.getmPlate());
+        values.put(PlatesInfoEntry.COLUMN_INFO, record.getmInfo());
+        values.put(PlatesInfoEntry.COLUMN_EXPIRES, record.getmExpires());
+        String selection = DetectionEntry.COLUMN_ID + " = ?";
+        String[] selectionArgs = {record.getmId()};
+        long updateRowId = db.update(PlatesInfoEntry.TABLE_NAME, values, selection, selectionArgs);
+        return updateRowId;
+    }
+
+    public long deletePlateInfo(AlprPlateInfo record) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        String selection = DetectionEntry.COLUMN_ID + " = ?";
+        String[] selectionArgs = {record.getmId()};
+        long updateRowId = db.delete(PlatesInfoEntry.TABLE_NAME, selection, selectionArgs);
+        return updateRowId;
+    }
+
+
     public int deleteAllPlateInfo() {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         String selection = PlatesInfoEntry.COLUMN_PLATE + " IS NOT NULL";
@@ -393,6 +419,49 @@ public class AlprStore {
         cursor.close();
         return plateInfo;
     }
+
+    public AlprPlateInfo queryPlateinfoById(String id) {
+
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String[] projection = {
+                PlatesInfoEntry.COLUMN_ID,
+                PlatesInfoEntry.COLUMN_DATETIME,
+                PlatesInfoEntry.COLUMN_PLATE,
+                PlatesInfoEntry.COLUMN_INFO,
+                PlatesInfoEntry.COLUMN_EXPIRES
+
+        };
+        Calendar cal = Calendar.getInstance();
+        Date w_date = cal.getTime();
+        SimpleDateFormat sdf;
+
+        String selection = PlatesInfoEntry.COLUMN_ID + " = ?";
+        String[] selectionArgs = { id };
+
+        Cursor cursor = db.query(
+                PlatesInfoEntry.TABLE_NAME,
+                projection,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                null
+        );
+
+        AlprPlateInfo plateInfo=null;
+        while (cursor.moveToNext()) {
+            String w_id = cursor.getString(cursor.getColumnIndexOrThrow(PlatesInfoEntry.COLUMN_ID));
+            String w_datetime = cursor.getString(cursor.getColumnIndexOrThrow(PlatesInfoEntry.COLUMN_DATETIME));
+            String w_info = cursor.getString(cursor.getColumnIndexOrThrow(PlatesInfoEntry.COLUMN_INFO));
+            String w_plate = cursor.getString(cursor.getColumnIndexOrThrow(PlatesInfoEntry.COLUMN_PLATE));
+            String w_expires = cursor.getString(cursor.getColumnIndexOrThrow(PlatesInfoEntry.COLUMN_EXPIRES));
+
+            plateInfo = new AlprPlateInfo(w_id, w_datetime, w_plate, w_info, w_expires);
+        }
+        cursor.close();
+        return plateInfo;
+    }
+
 
 
 

@@ -50,6 +50,7 @@ public class AlprDetector {
         return recognize (country, region, topN, minConfidence,imageData);
     }
 
+
     public List<AlprDetection> recognize(String country, String region, int topN, float minConfidence, byte[] imageData) throws AlprException {
 
         String w_configFile = dataDir + File.separatorChar + "config" + File.separatorChar + "openalpr.conf";
@@ -104,8 +105,8 @@ public class AlprDetector {
                         w_y0,
                         w_x1,
                         w_y1,
-                        w_region,
                         country,
+                        w_region,
                         w_regionConfidence,
                         w_processing_time
                 );
