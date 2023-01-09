@@ -1,0 +1,5 @@
+include 'Tesseract4Android-4.1.1'
+include 'opencv-4.6.0-android-sdk'
+include 'OpenALPR-2.3.0'
+
+

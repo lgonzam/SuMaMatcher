@@ -1,0 +1,249 @@
+plugins {
+    id 'de.undercouch.download' version '5.0.0'
+}
+
+/* for download task */
+def tess4androidUrl = 'https://github.com/adaptech-cz/Tesseract4Android/archive/refs/tags/4.1.1.zip'
+def opencvUrl = 'https://github.com/opencv/opencv/releases/download/3.4.19/opencv-4.6.0-android-sdk.zip'
+//def opencv34Url = 'https://github.com/opencv/opencv/releases/download/3.4.16/opencv-3.4.16-android-sdk.zip'
+def openalprUrl = 'https://github.com/openalpr/openalpr/archive/refs/tags/v2.3.0.zip'
+def downloadDir = "${projectDir}/download"
+def distDir = "${projectDir}/dist"
+def tessProjectDir = "${projectDir}/Tesseract4Android-4.1.1"
+def opencvProjectDir = "${projectDir}/OpenCV-android-sdk"
+def openalprProjectDir = "${projectDir}/OpenALPR-2.3.0"
+def tessReleaseDir = "${projectDir}/dist/Tesseract4Android-4.1.1/"
+def tessReleaseIncludeDir = "${projectDir}/dist/Tesseract4Android-4.1.1/include"
+def tessReleaseIncludeDir2 = "${projectDir}/dist/Tesseract4Android-4.1.1/include/tesseract"
+def opencvReleaseDir = "${projectDir}/dist/OpenCV-android-sdk"
+def opencvReleaseIncludeDir = "${projectDir}/dist/OpenCV-android-sdk/include"
+def openalprReleaseDir = "${projectDir}/dist/openalpr-2.3.0/jniLib"
+def openalprReleaseJavaDir = "${projectDir}/dist/openalpr-2.3.0/java/com/openalpr/jni"
+def openalprReleaseConfDir = "${projectDir}/dist/openalpr-2.3.0/assets/config"
+def openalprReleaseRunDir = "${projectDir}/dist/openalpr-2.3.0/assets/runtime_data"
+
+tasks.register ('clean') {
+    delete "$downloadDir"
+    delete "$tessProjectDir"
+    delete "$opencvProjectDir"
+    delete "$openalprProjectDir"
+    delete "$distDir"
+}
+
+task downloadTess4Android(type: Download) {
+    src tess4androidUrl
+    dest new File(downloadDir, 'Tesseract4Android-4.1.1.zip')
+	
+}
+
+task downloadOpenCV(type: Download) {
+    src opencvUrl
+    dest new File(downloadDir, 'opencv-4.6.0-android-sdk.zip')
+}
+
+task downloadOpenALPR(type: Download) {
+    src openalprUrl
+    dest new File(downloadDir, 'openalpr-2.3.0.zip')
+}
+
+task downloadUnzipTess4Android(dependsOn: downloadTess4Android, type: Copy) {
+    from zipTree(downloadTess4Android.dest)
+    into projectDir
+}
+
+task downloadUnzipOpenCV(dependsOn: downloadOpenCV, type: Copy) {
+    from zipTree(downloadOpenCV.dest)
+    into projectDir
+}
+
+task downloadUnzipOpenALPR(dependsOn: downloadOpenALPR, type: Copy) {
+    from zipTree(downloadOpenALPR.dest)
+    into projectDir
+}
+
+tasks.register ('unzipAll'){
+    dependsOn 'downloadUnzipTess4Android'
+    dependsOn 'downloadUnzipOpenCV'
+    dependsOn 'downloadUnzipOpenALPR'
+}
+
+
+
+/* for copy OpenAlpr src */
+def openalprAndroidDir="${projectDir}/OpenALPR_android/app/src/main/cpp/openalpr"
+task copyOpenAlpr ( type: Copy) {
+    from openalprProjectDir
+    into openalprAndroidDir
+    include "**/*"
+}
+
+
+/* for copy open cv deps  */
+
+def opencvLibsDir = "${projectDir}/OpenCV-android-sdk/sdk/native/libs"
+def opencvIncludeDir = "${projectDir}/OpenCV-android-sdk/sdk/native/jni/include"
+task copyOpencvLibs ( type: Copy) {
+    from opencvLibsDir
+    into opencvReleaseDir
+    include "**/*"
+}
+
+task copyOpencvInclude ( type: Copy) {
+    from opencvIncludeDir
+    into opencvReleaseIncludeDir
+    include "**/*"
+}
+
+tasks.register ('copyOpencvRelease'){
+    dependsOn 'copyOpencvLibs'
+    dependsOn 'copyOpencvInclude'
+}
+
+
+def opencvDepsDir="${projectDir}/OpenALPR_android/app/src/main/cpp/opencv"
+task copyOpencvDeps ( type: Copy) {
+    from opencvReleaseDir
+    into opencvDepsDir
+}
+
+
+def tessDepsDir2="${projectDir}/OpenALPR_android/app/src/main/cpp/tesseract"
+tasks.register ('cleanAll') {
+    delete "$downloadDir"
+    delete "$tessProjectDir"
+    delete "$opencvProjectDir"
+    delete "$openalprProjectDir"
+    delete "$distDir"
+    delete "$tessDepsDir2"
+    delete "$opencvDepsDir"
+}
+
+
+
+/* for copy task, before build the project
+    ** cd Tesseract4Android-4.1.1
+    ** gradle build
+
+*/
+
+def tessLibsDir = "${projectDir}/Tesseract4Android-4.1.1/tesseract4android/build/intermediates/library_and_local_jars_jni/standardRelease/jni"
+def tessIncludeDir = "${projectDir}/Tesseract4Android-4.1.1/tesseract4android/src/main/cpp/tesseract/src/src"
+def tessIncludeDir2 = "${projectDir}/Tesseract4Android-4.1.1/tesseract4android/src/main/cpp/tesseract/src/include/tesseract"
+def tessIncludeDir3 = "${projectDir}/Tesseract4Android-4.1.1/tesseract4android/src/main/cpp/tesseract/"
+
+tasks.register ('tessBuild'){
+    dependsOn ':Tesseract4Android-4.1.1:build'
+}
+
+task copyTessLibs ( type: Copy) {
+    from tessLibsDir
+    into tessReleaseDir
+    include "**/*"
+	
+}
+
+task copyTessInclude ( type: Copy) {
+    from tessIncludeDir
+    into tessReleaseIncludeDir
+    include "**/*.h"
+    include "**/*.hpp"	
+}
+
+task copyTessInclude2 ( type: Copy) {
+    from tessIncludeDir2
+    into tessReleaseIncludeDir2
+    include "**/*.h"
+    include "**/*.hpp"	
+}
+
+task copyTessInclude3 ( type: Copy) {
+    from tessIncludeDir3
+    into tessReleaseIncludeDir2
+    include "*/*.h"
+    include "*/*.hpp"
+    include 'config_auto.h.in'
+    rename('config_auto.h.in', 'config_auto.h')    
+    
+}
+
+tasks.register ('copyTessRelease'){
+    dependsOn 'copyTessLibs'
+    dependsOn 'copyTessInclude'
+    dependsOn 'copyTessInclude2'
+    dependsOn 'copyTessInclude3'
+
+}
+
+
+def tessDepsDir = "${projectDir}/OpenALPR_android/app/src/main/cpp/tesseract"
+
+task copyTessDeps ( type: Copy) {
+    from tessReleaseDir
+    into tessDepsDir
+}
+
+
+
+/* for copy src and deps, before build the project and after build OpenALPR_android
+    ** cd Tesseract4Android-4.1.1
+    ** gradle build
+
+task copyDeps ( type: Copy) {
+    dependsOn 'copyOpenAlpr'
+    dependsOn 'copyTessDeps'
+    dependsOn 'copyOpencvDeps'
+}
+
+*/
+task copyDeps ( type: Copy) {
+    dependsOn 'copyTessDeps'
+    dependsOn 'copyOpencvDeps'
+}
+
+
+/* for copy all deps, before build the project
+    ** cd OpenALPR_android
+    ** gradle build
+
+*/
+
+def openalprLibDir="${projectDir}/OpenALPR_android/app/build/intermediates/stripped_native_libs/release/out/lib"
+def openalprJavaDir="${projectDir}/OpenALPR_android/app/src/main/java/com/openalpr/jni"
+def openalprConfDir="${projectDir}/OpenALPR_android/app/src/main/cpp/openalpr/config"
+def openalprRunDir="${projectDir}/OpenALPR_android/app/src/main/cpp/openalpr/runtime_data"
+
+task copyAlprLibs ( type: Copy) {
+    from openalprLibDir
+    into openalprReleaseDir    
+}
+
+task copyAlprJava ( type: Copy) {
+    from openalprJavaDir
+    into openalprReleaseJavaDir    
+}
+
+task copyAlprTess ( type: Copy) {
+    from tessReleaseDir
+    into openalprReleaseJavaDir    
+}
+
+task copyAlprConf ( type: Copy) {
+    from openalprConfDir
+    into openalprReleaseConfDir    
+}
+
+task copyAlprRun ( type: Copy) {
+    from openalprRunDir
+    into openalprReleaseRunDir    
+}
+
+tasks.register ('copyAlprRelease') {
+    dependsOn 'copyAlprLibs'
+    dependsOn 'copyAlprJava' 
+    dependsOn 'copyAlprTess'
+    dependsOn 'copyAlprConf'
+    dependsOn 'copyAlprRun'
+}
+
+
+
