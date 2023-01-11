@@ -1,7 +1,7 @@
 package es.suma.matmatcher;
 
 /*
- * 2002 Suma Gestión Tributaria. Unidad Proyectos Especiales.
+ * 2022 Suma Gestión Tributaria. Unidad Proyectos Especiales.
  *
  * This file is part of es.suma.matmarcher App
  *
@@ -628,7 +628,7 @@ public class CameraActivity extends AppCompatActivity
         //UNCOMENT ONLY FOR TESTING
         //String androidDownloadDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath();
         //Utils.copyAssetFolder(this.getAssets(), "samples", androidDownloadDir);
-        //Utils.copyAssetFolder(this.getAssets(), "samples", "/storage/emulated/0/download");
+        //Utils.copyAssetFolder(this.getAssets(), "", "/storage/emulated/0/download");
 
         int sensorOrientation = CameraActivity.SUPPORTED_ORIENTATION - getDisplayRotation();
         LOGGER.i("Camera orientation relative to screen canvas: %d", sensorOrientation);

@@ -1,7 +1,7 @@
 package es.suma.matmatcher;
 
 /*
- * 2002 Suma Gestión Tributaria. Unidad Proyectos Especiales.
+ * 2022 Suma Gestión Tributaria. Unidad Proyectos Especiales.
  *
  * This file is part of es.suma.matmarcher App
  *
